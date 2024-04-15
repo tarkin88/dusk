@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 5;   /* border pixel of windows */
+static const unsigned int borderpx       = 1;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const unsigned int gappih         = 5;   /* horiz inner gap between windows */
 static const unsigned int gappiv         = 5;   /* vert inner gap between windows */
@@ -26,7 +26,7 @@ static const float pfact                 = 0.25; /* size of workspace previews r
 static int floatposgrid_x                = 5;   /* float grid columns */
 static int floatposgrid_y                = 5;   /* float grid rows */
 
-static const int horizpadbar             = 2;   /* horizontal (inner) padding for statusbar (increases lrpad) */
+static const int horizpadbar             = 0;   /* horizontal (inner) padding for statusbar (increases lrpad) */
 static const int vertpadbar              = 0;   /* vertical (inner) padding for statusbar (increases bh, overridden by bar_height) */
 
 static const char slopspawnstyle[]       = "-t 0 -c 0.92,0.85,0.69,0.3 -o"; /* do NOT define -f (format) here */
@@ -75,20 +75,20 @@ static uint64_t functionality = 0
 //	|AutoReduceNmaster // automatically reduce the number of master clients if one is closed
 //	|BanishMouseCursor // like xbanish, hides mouse cursor when using the keyboard
 //	|BanishMouseCursorToCorner // makes BanishMouseCursor move the cursor to the top right corner of the screen
-//	|SmartGaps // enables no or increased gaps if there is only one visible window
+  |SmartGaps // enables no or increased gaps if there is only one visible window
 //	|SmartGapsMonocle // enforces no gaps in monocle layout
 	|Systray // enables a systray in the bar
 //	|SystrayNoAlpha // disables the use of transparency for the systray, enable if you do not use a compositor
 	|Swallow // allows X applications started from the command line to swallow the terminal
 	|SwallowFloating // allow floating windows to swallow the terminal by default
 	|CenteredWindowName // center the window titles on the bar
-//	|BarActiveGroupBorderColor // use border color of active group for the bar, otherwise normal scheme is used
+  |BarActiveGroupBorderColor // use border color of active group for the bar, otherwise normal scheme is used
 //	|BarMasterGroupBorderColor // use border color of master group for the bar, otherwise normal scheme is used
 //	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
 	|SpawnCwd // spawn applications in the currently selected client's working directory
-	|ColorEmoji // enables color emoji support (removes Xft workaround)
+	// |ColorEmoji // enables color emoji support (removes Xft workaround)
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
-	|BarBorder // draw a border around the bar
+	// |BarBorder // draw a border around the bar
 	|BarPadding // add vertical and side padding as per vertpad and sidepad variables above
 //	|NoBorders // as per the noborder patch, show no border when only one client in tiled mode
 //	|Warp // warp cursor to currently focused window
@@ -211,13 +211,21 @@ static const Rule clientrules[] = {
 	{ .instance = "spterm (w)", .scratchkey = 'w', .flags = Floating },
 	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating },
 	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating },
+	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating },
+  { .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
+	{ .class = "Spotify", .workspace = "6", .flags = SwitchWorkspace },
 	{ .class = "Gimp", .workspace = "5", .flags = Floating|SwitchWorkspace },
-	{ .class = "firefox", .workspace = "8", .flags = AttachMaster|SwitchWorkspace },
+  { .class = "1Password", .flags = Floating},
+  { .class = "Arandr", .flags = Floating},
+	{ .class = "Lxappearance", .flags = Floating},
+	{ .class = "Galculator", .flags = Floating, .floatpos = "50% 50%" },
+	{ .class = "firefox", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
+	{ .class = "Google-chrome", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
 	{ .class = "Steam", .flags = Floating|Centered },
 	{ .class = "steam_app_", .flags = SteamGame|Floating|Centered },
 	{ .class = "Google-chrome", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
 	{ .role = "pop-up", .flags = AlwaysOnTop|Floating|Centered },
-	{ .role = "browser", .workspace = "8", .flags = AttachBelow|OnlyModButtons|SwitchWorkspace },
+	{ .role = "browser", .flags = AttachBelow|OnlyModButtons|SwitchWorkspace },
 	{ .class = "Gnome-terminal", .role = "gnome-terminal-preferences", .flags = Centered },
 	{ .class = "Diffuse", .workspace = "4", .flags = NoSwallow|SwitchWorkspace|RevertWorkspace },
 	{ .class = "File-roller", .workspace = "9", .flags = Centered|Floating|SwitchWorkspace|RevertWorkspace },
@@ -440,25 +448,53 @@ static const char *termcmd[]  = { NULL, "st", NULL };
 static const char *dmenucmd[] = {
 	NULL,
 	"dmenu_run",
-	"-fn", dmenufont,
-	"-nb", dmenunormbgcolor,
-	"-nf", dmenunormfgcolor,
-	"-sb", dmenuselbgcolor,
-	"-sf", dmenuselfgcolor,
-//	"-bb", dmenubordercolor,
+  "-c",
+  "-l", "7", 
 	NULL
 };
 static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", "-g", "120x34", NULL };
 static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", "-g", "120x34", NULL };
 static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-g", "144x41", "-e", "ranger", NULL };
+static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-g", "144x41", "-e", "pulsemixer", NULL };
 static const char *statusclickcmd[] = { NULL, "bin/statusbar/statusclick.sh", NULL };
+static const char *upvol[] = { NULL, "pulsemixer", "--change-volume", "+5", NULL };
+static const char *downvol[] = { NULL, "pulsemixer", "--change-volume", "-5", NULL };
+static const char *togglevol[] = { NULL, "pulsemixer", "--toggle-mute", NULL };
+static const char *playernext[] = { NULL, "playerctl", "next", NULL };
+static const char *playerprev[] = { NULL, "playerctl", "previous", NULL };
+static const char *playerplaypause[] = { NULL, "playerctl", "play-pause", NULL };
+static const char *clipboard_menu[] = {NULL, "/home/frank/.local/bin/clipboard-menu", NULL };
+static const char *power_menu[] = {NULL, "/home/frank/.local/bin/power-menu", NULL };
+static const char *favorites_menu[] = {NULL, "/home/frank/.local/bin/favorites-menu", NULL };
+static const char *favorites_menu_apps[] = {NULL, "/home/frank/.local/bin/favorites-apps-menu", NULL };
+static const char *keyboard_switcher[] = {NULL, "/home/frank/.local/bin/keyboard-swithcer-menu", NULL };
+static const char *screenshots_menu[] = {NULL, "/home/frank/.local/bin/screenshots-menu", "-m", NULL };
 
+
+
+#include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* type       modifier                      key              function                argument */
-	{ KeyPress,   MODKEY,                       XK_d,            spawn,                  {.v = dmenucmd } }, // spawn dmenu for launching other programs
+	{ KeyPress,   MODKEY,                       XK_p,            spawn,                  {.v = dmenucmd } }, // spawn dmenu for launching other programs
 	{ KeyPress,   MODKEY,                       XK_Return,       spawn,                  {.v = termcmd } }, // spawn a terminal
 	{ KeyPress,   MODKEY|Shift,                 XK_Return,       riospawn,               {.v = termcmd } }, // draw/spawn a terminal
 	{ KeyPress,   MODKEY,                       XK_b,            togglebar,              {0} }, // toggles the display of the bar(s) on the current monitor
+ /* personal */
+  { KeyPress,   0,                            XF86XK_AudioRaiseVolume,                 spawn,                  {.v = upvol } }, // raise volume
+	{ KeyPress,   0,                            XF86XK_AudioLowerVolume,                 spawn,                  {.v = downvol } }, // lower volume
+	{ KeyPress,   0,                            XF86XK_AudioMute,                        spawn,                  {.v = togglevol } }, // toggle volume
+	{ KeyPress,   0,                            XF86XK_AudioNext,                        spawn,                  {.v = playernext } }, // next song
+	{ KeyPress,   0,                            XF86XK_AudioPrev,                        spawn,                  {.v = playerprev } }, // prev song
+	{ KeyPress,   0,                            XF86XK_AudioPlay,                        spawn,                  {.v = playerplaypause } }, // toggle player
+  { KeyPress,   MODKEY,                       XK_Tab,                                  togglews,               {0} },
+  { KeyPress,   Ctrl|Alt,                     XK_h,            spawn,                  {.v = clipboard_menu } },
+  { KeyPress,   Ctrl|Alt,                     XK_x,            spawn,                  {.v = power_menu } },
+  { KeyPress,   Ctrl|Alt,                     XK_e,            spawn,                  {.v = favorites_menu } },
+  { KeyPress,   Ctrl|Alt,                     XK_space,        spawn,                  {.v = keyboard_switcher } },
+  { KeyPress,   Ctrl|Alt,                     XK_p,            spawn,                  {.v = favorites_menu_apps } },
+  { KeyPress,   0,                            XK_Print,        spawn,                  {.v = screenshots_menu } },
+	{ KeyPress,   MODKEY|Shift,                 XK_c,                                    killclient,             {0} }, // close the currently focused window
+ /* end personal */
 
 	{ KeyPress,   MODKEY,                       XK_j,            focusstack,             {.i = +1 } }, // focus on the next client in the stack
 	{ KeyPress,   MODKEY,                       XK_k,            focusstack,             {.i = -1 } }, // focus on the previous client in the stack
@@ -487,12 +523,11 @@ static Key keys[] = {
 
 	{ KeyPress,   MODKEY,                       XK_backslash,    togglepinnedws,         {0} }, // toggle pinning of currently selected workspace on the current monitor
 	{ KeyPress,   MODKEY,                       XK_z,            showhideclient,         {0} }, // hide the currently selected client (or show if hidden)
-	{ KeyPress,   MODKEY,                       XK_q,            killclient,             {0} }, // close the currently focused window
 	{ KeyPress,   MODKEY|Shift,                 XK_q,            restart,                {0} }, // restart dusk
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_q,            quit,                   {0} }, // exit dusk
 
-	{ KeyPress,   MODKEY,                       XK_v,            group,                  {0} }, // groups floating clients together
-	{ KeyPress,   MODKEY|Shift,                 XK_v,            ungroup,                {0} }, // ungroups floating clients
+	{ KeyPress,   MODKEY|Shift,                 XK_v,            group,                  {0} }, // groups floating clients together
+	{ KeyPress,   MODKEY|Shift|Ctrl,            XK_v,            ungroup,                {0} }, // ungroups floating clients
 
 	{ KeyPress,   MODKEY,                       XK_a,            markall,                {0} }, // marks all clients on the selected workspace
 	{ KeyPress,   MODKEY|Ctrl,                  XK_a,            markall,                {1} }, // marks all floating clients on the selected workspace
@@ -535,7 +570,7 @@ static Key keys[] = {
 	{ KeyPress,   MODKEY,                       XK_comma,        viewwsdir,              {.i = -2 } }, // view the next workspace left of current workspace that has clients (on the current monitor)
 	{ KeyPress,   MODKEY,                       XK_period,       viewwsdir,              {.i = +2 } }, // view the next workspace right of current workspace that has clients (on the current monitor)
 	{ KeyPress,   MODKEY|Shift,                 XK_Tab,          viewwsdir,              {.i = -2 } }, // view the next workspace left of current workspace that has clients (on the current monitor)
-	{ KeyPress,   MODKEY,                       XK_Tab,          viewwsdir,              {.i = +2 } }, // view the next workspace right of current workspace that has clients (on the current monitor)
+	// { KeyPress,   MODKEY,                       XK_Tab,          viewwsdir,              {.i = +2 } }, // view the next workspace right of current workspace that has clients (on the current monitor)
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_comma,        movewsdir,              {.i = -1 } }, // move client to workspace on the immediate left of current workspace (on the current monitor)
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_period,       movewsdir,              {.i = +1 } }, // move client to workspace on the immediate right of current workspace (on the current monitor)
 
@@ -546,6 +581,7 @@ static Key keys[] = {
 	SCRATCHKEYS(MODKEY,                         XK_w,            spcmd_w)
 	SCRATCHKEYS(MODKEY,                         XK_e,            spcmd_e)
 	SCRATCHKEYS(MODKEY,                         XK_r,            spcmd_r)
+	SCRATCHKEYS(MODKEY,                         XK_v,            spcmd_v)
 
 	WSKEYS(MODKEY,                              XK_1,            "1")
 	WSKEYS(MODKEY,                              XK_2,            "2")
