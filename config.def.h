@@ -114,7 +114,7 @@ static uint64_t functionality = 0
 //	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
 //	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
 //	|WinTitleIcons // adds application icons to window titles in the bar
-|StackerIcons // adds a stacker icon hints in window titles
+//  |StackerIcons // adds a stacker icon hints in window titles
 //	|WorkspaceLabels // adds the class of the master client next to the workspace icon
 //	|WorkspacePreview // adds preview images when hovering workspace icons in the bar
 ;
@@ -231,7 +231,7 @@ static const Rule clientrules[] = {
 	{ .class = "Diffuse", .workspace = "4", .flags = NoSwallow|SwitchWorkspace|RevertWorkspace },
 	{ .class = "File-roller", .workspace = "9", .flags = Centered|Floating|SwitchWorkspace|RevertWorkspace },
 	{ .class = "Alacritty", .flags = Terminal },
-	{ .class = "st-256color", .flags = Terminal|AttachBottom },
+	{ .class = "St", .flags = Terminal|AttachBottom },
 	{ .class = "XTerm", .flags = Terminal },
 	{ .class = "Xephyr", .flags = NoSwallow|Floating|Centered },
 	{ .title = "Event Tester", .flags = NoSwallow },
@@ -388,8 +388,8 @@ static const int enablegaps  = 1;    /* whether gaps are enabled by default or n
 /* layout(s) */
 static const Layout layouts[] = {
 	/* symbol     arrange function, { nmaster, nstack, layout, master axis, stack axis, secondary stack axis, symbol func }, name */
-	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
 	{ "[M]",      flextile,         { -1, -1, NO_SPLIT, MONOCLE, MONOCLE, 0, NULL }, "monocle" },
+	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
 	{ "[T]",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TATAMI_CFACTS, 0, NULL }, "tatami mats" },
 	{ "[]=",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "tile" },
 	{ "|||",      flextile,         { -1, -1, NO_SPLIT, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "columns" },
@@ -586,9 +586,9 @@ static Key keys[] = {
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_comma,        movewsdir,              {.i = -1 } }, // move client to workspace on the immediate left of current workspace (on the current monitor)
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_period,       movewsdir,              {.i = +1 } }, // move client to workspace on the immediate right of current workspace (on the current monitor)
 
-    STACKKEYS(Alt|Ctrl,                                        stackfocus)                           // focus on the nth client in the stack, see the STACKKEYS macro for keybindings
-    STACKKEYS(Alt|Ctrl|Shift,                                  stackpush)                            // move the currently focused client to the nth place in the stack
-    STACKKEYS(Alt|Shift,                                       stackswap)                            // swap the currently focused client with the nth client in the stack
+    // STACKKEYS(Alt|Ctrl,                                        stackfocus)                           // focus on the nth client in the stack, see the STACKKEYS macro for keybindings
+    // STACKKEYS(Alt|Ctrl|Shift,                                  stackpush)                            // move the currently focused client to the nth place in the stack
+    // STACKKEYS(Alt|Shift,                                       stackswap)                            // swap the currently focused client with the nth client in the stack
 
 	SCRATCHKEYS(MODKEY,                         XK_w,            spcmd_w)
 	SCRATCHKEYS(MODKEY,                         XK_e,            spcmd_e)
