@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 2;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 5;   /* horiz inner gap between windows */
-static const unsigned int gappiv         = 5;   /* vert inner gap between windows */
-static const unsigned int gappoh         = 5;   /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 5;   /* vert outer gap between windows and screen edge */
-static const unsigned int gappfl         = 5;   /* gap between floating windows (when relevant) */
+static const unsigned int gappih         = 9;   /* horiz inner gap between windows */
+static const unsigned int gappiv         = 9;   /* vert inner gap between windows */
+static const unsigned int gappoh         = 9;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 9;   /* vert outer gap between windows and screen edge */
+static const unsigned int gappfl         = 9;   /* gap between floating windows (when relevant) */
 static const unsigned int smartgaps_fact = 0;   /* smartgaps factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 
 static unsigned int attachdefault        = AttachAside; // AttachMaster, AttachAbove, AttachAside, AttachBelow, AttachBottom
@@ -114,7 +114,7 @@ static uint64_t functionality = 0
 //	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
 //	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
 //	|WinTitleIcons // adds application icons to window titles in the bar
-//	|StackerIcons // adds a stacker icon hints in window titles
+|StackerIcons // adds a stacker icon hints in window titles
 //	|WorkspaceLabels // adds the class of the master client next to the workspace icon
 //	|WorkspacePreview // adds preview images when hovering workspace icons in the bar
 ;
@@ -380,7 +380,7 @@ static const WorkspaceRule wsrules[] = {
 	{  "9",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "9",   "",   "[9]", },
 };
 
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.65; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int nstack      = 0;    /* number of clients in primary stack area */
 static const int enablegaps  = 1;    /* whether gaps are enabled by default or not */
@@ -388,6 +388,7 @@ static const int enablegaps  = 1;    /* whether gaps are enabled by default or n
 /* layout(s) */
 static const Layout layouts[] = {
 	/* symbol     arrange function, { nmaster, nstack, layout, master axis, stack axis, secondary stack axis, symbol func }, name */
+	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
 	{ "[M]",      flextile,         { -1, -1, NO_SPLIT, MONOCLE, MONOCLE, 0, NULL }, "monocle" },
 	{ "[T]",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TATAMI_CFACTS, 0, NULL }, "tatami mats" },
 	{ "[]=",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "tile" },
@@ -395,7 +396,6 @@ static const Layout layouts[] = {
 	{ "===",      flextile,         { -1, -1, NO_SPLIT, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "rows" },
 	{ "||=",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, 0, NULL }, "col" },
 	{ ">M>",      flextile,         { -1, -1, FLOATING_MASTER, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "floating master" },
-	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
 	{ "TTT",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "bstack" },
 	{ "===",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, 0, NULL }, "bstackhoriz" },
 	{ "==#",      flextile,         { -1, -1, SPLIT_HORIZONTAL, TOP_TO_BOTTOM, GAPPLESSGRID_CFACTS, 0, NULL }, "bstackgrid" },
@@ -501,7 +501,7 @@ static Key keys[] = {
   { KeyPress,   MODKEY,                       XK_Tab,                                  togglews,               {0} },
   { KeyPress,   Ctrl|Alt,                     XK_h,            spawn,                  {.v = clipboard_menu } },
   { KeyPress,   Ctrl|Alt,                     XK_x,            spawn,                  {.v = power_menu } },
-  { KeyPress,   Ctrl|Alt,                     XK_e,            spawn,                  {.v = favorites_menu } },
+  { KeyPress,   Ctrl|Alt,                     XK_o,            spawn,                  {.v = favorites_menu } },
   { KeyPress,   Ctrl|Alt,                     XK_space,        spawn,                  {.v = keyboard_switcher } },
   { KeyPress,   Ctrl|Alt,                     XK_p,            spawn,                  {.v = favorites_menu_apps } },
   { KeyPress,   0,                            XK_Print,        spawn,                  {.v = screenshots_menu } },
@@ -586,9 +586,9 @@ static Key keys[] = {
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_comma,        movewsdir,              {.i = -1 } }, // move client to workspace on the immediate left of current workspace (on the current monitor)
 	{ KeyPress,   MODKEY|Ctrl|Alt,              XK_period,       movewsdir,              {.i = +1 } }, // move client to workspace on the immediate right of current workspace (on the current monitor)
 
-//	STACKKEYS(AltGr|Ctrl,                                        stackfocus)                           // focus on the nth client in the stack, see the STACKKEYS macro for keybindings
-//	STACKKEYS(AltGr|Ctrl|Shift,                                  stackpush)                            // move the currently focused client to the nth place in the stack
-//	STACKKEYS(AltGr|Shift,                                       stackswap)                            // swap the currently focused client with the nth client in the stack
+    STACKKEYS(Alt|Ctrl,                                        stackfocus)                           // focus on the nth client in the stack, see the STACKKEYS macro for keybindings
+    STACKKEYS(Alt|Ctrl|Shift,                                  stackpush)                            // move the currently focused client to the nth place in the stack
+    STACKKEYS(Alt|Shift,                                       stackswap)                            // swap the currently focused client with the nth client in the stack
 
 	SCRATCHKEYS(MODKEY,                         XK_w,            spcmd_w)
 	SCRATCHKEYS(MODKEY,                         XK_e,            spcmd_e)
