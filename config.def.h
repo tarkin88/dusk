@@ -215,6 +215,7 @@ static const Rule clientrules[] = {
 	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating },
   { .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
 	{ .class = "Spotify", .workspace = "6", .flags = SwitchWorkspace },
+	{ .class = "Code", .workspace = "2", .flags = SwitchWorkspace },
 	{ .class = "Gimp", .workspace = "5", .flags = Floating|SwitchWorkspace },
   { .class = "1Password", .flags = Floating},
   { .class = "Arandr", .flags = Floating},
@@ -370,9 +371,9 @@ static const WorkspaceRule wsrules[] = {
 	/*                                                                     ------------------------------- schemes ------------------------------- ------ icons ------
 	   name,  monitor,  pinned,  layout,  mfact,  nmaster,  nstack,  gaps, default,          visible,          selected,         occupied,         def,   vac,  occ,  */
 	{  "1",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "1",   "",   "[1]", },
-	{  "2",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
+	{  "2",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
 	{  "3",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "3",   "",   "[3]", },
-	{  "4",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "[4]", },
+	{  "4",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "[4]", },
 	{  "5",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "5",   "",   "[5]", },
 	{  "6",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "[6]", },
 	{  "7",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "7",   "",   "[7]", },
