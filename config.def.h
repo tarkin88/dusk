@@ -457,35 +457,31 @@ static const StackerIcon stackericons[] = {
 #define CMD(...)   { .v = (const char*[]){ NULL, __VA_ARGS__, NULL } }
 
 /* Scratch/Spawn commands:        NULL (scratchkey), command, argument, argument, ..., NULL */
-static const char *termcmd[]  = { NULL, "kitty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *dmenucmd[] = {
-	NULL,
 	"dmenu_run",
   "-c",
   "-l", "7", 
 	NULL
 };
-// static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", "-g", "120x34", NULL };
-// static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", "-g", "120x34", NULL };
-// static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-g", "144x41", "-e", "ranger", NULL };
-// static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-g", "144x41", "-e", "pulsemixer", NULL };
+
 static const char *spcmd_w[] = {"w", "kitty", "--name", "spterm (w)",  NULL };
 static const char *spcmd_e[] = {"e", "kitty", "--name", "spterm (e)",  NULL };
 static const char *spcmd_r[] = {"r", "kitty", "--name", "spfm (r)","-e", "ranger", NULL };
 static const char *spcmd_v[] = {"v", "kitty", "--name", "spvol (v)", "-e", "pulsemixer", NULL };
-static const char *statusclickcmd[] = { NULL, "~/.local/bin/statusbar/statusclick.sh", NULL };
-static const char *upvol[] = { NULL, "pulsemixer", "--change-volume", "+5", NULL };
-static const char *downvol[] = { NULL, "pulsemixer", "--change-volume", "-5", NULL };
-static const char *togglevol[] = { NULL, "pulsemixer", "--toggle-mute", NULL };
-static const char *playernext[] = { NULL, "playerctl", "next", NULL };
-static const char *playerprev[] = { NULL, "playerctl", "previous", NULL };
-static const char *playerplaypause[] = { NULL, "playerctl", "play-pause", NULL };
-static const char *clipboard_menu[] = {NULL, "~/.local/bin/clipboard-menu", NULL };
-static const char *power_menu[] = {NULL, "~/.local/bin/power-menu", NULL };
-static const char *favorites_menu[] = {NULL, "~/.local/bin/favorites-menu", NULL };
-static const char *favorites_menu_apps[] = {NULL, "~/.local/bin/favorites-apps-menu", NULL };
-static const char *keyboard_switcher[] = {NULL, "~/.local/bin/keyboard-swithcer-menu", NULL };
-static const char *screenshots_menu[] = {NULL, "~/.local/bin/screenshots-menu", "-m", NULL };
+static const char *statusclickcmd[] = {  "~/.local/bin/statusbar/statusclick.sh", NULL };
+static const char *upvol[] = {  "pulsemixer", "--change-volume", "+5", NULL };
+static const char *downvol[] = {  "pulsemixer", "--change-volume", "-5", NULL };
+static const char *togglevol[] = {  "pulsemixer", "--toggle-mute", NULL };
+static const char *playernext[] = {  "playerctl", "next", NULL };
+static const char *playerprev[] = {  "playerctl", "previous", NULL };
+static const char *playerplaypause[] = {  "playerctl", "play-pause", NULL };
+static const char *clipboard_menu[] = { "~/.local/bin/clipboard-menu", NULL };
+static const char *power_menu[] = { "~/.local/bin/power-menu", NULL };
+static const char *favorites_menu[] = { "~/.local/bin/favorites-menu", NULL };
+static const char *favorites_menu_apps[] = { "~/.local/bin/favorites-apps-menu", NULL };
+static const char *keyboard_switcher[] = { "~/.local/bin/keyboard-swithcer-menu", NULL };
+static const char *screenshots_menu[] = { "~/.local/bin/screenshots-menu", "-m", NULL };
 
 
 
