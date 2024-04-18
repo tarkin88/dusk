@@ -209,10 +209,10 @@ static const Rule clientrules[] = {
 	{ .wintype = WTYPE "UTILITY", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "TOOLBAR", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "SPLASH", .flags = AlwaysOnTop|Centered|Floating },
-	{ .instance = "spterm (w)", .scratchkey = 'w', .flags = Floating },
-	{ .instance = "spterm (e)", .scratchkey = 'e', .flags = Floating },
-	{ .instance = "spfm (r)", .scratchkey = 'r', .flags = Floating },
-	{ .instance = "spvol (v)", .scratchkey = 'v', .flags = Floating },
+	{ .instance = "spterm (w)", .scratchkey = 'w', .floatpos = "50% 0%  80% 35%", .flags = Floating },
+	{ .instance = "spterm (e)", .scratchkey = 'e', .floatpos = "50% 0%  100% 45%", .flags = Floating },
+	{ .instance = "spfm (r)", .scratchkey = 'r', .floatpos = "50% 50% 40% 30%", .flags = Floating },
+	{ .instance = "spvol (v)", .scratchkey = 'v',  .floatpos = "50% 50% 30% 20%", .flags = Floating },
   { .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
 	{ .class = "Spotify", .workspace = "6", .flags = SwitchWorkspace },
 	{ .class = "Code", .workspace = "2", .flags = SwitchWorkspace },
@@ -231,7 +231,7 @@ static const Rule clientrules[] = {
 	{ .class = "Gnome-terminal", .role = "gnome-terminal-preferences", .flags = Centered },
 	{ .class = "Diffuse", .workspace = "4", .flags = NoSwallow|SwitchWorkspace|RevertWorkspace },
 	{ .class = "File-roller", .workspace = "9", .flags = Centered|Floating|SwitchWorkspace|RevertWorkspace },
-	{ .class = "Alacritty", .flags = Terminal },
+	{ .class = "Kitty", .flags = Terminal },
 	{ .class = "St", .flags = Terminal|AttachBottom },
 	{ .class = "XTerm", .flags = Terminal },
 	{ .class = "Xephyr", .flags = NoSwallow|Floating|Centered },
@@ -457,7 +457,7 @@ static const StackerIcon stackericons[] = {
 #define CMD(...)   { .v = (const char*[]){ NULL, __VA_ARGS__, NULL } }
 
 /* Scratch/Spawn commands:        NULL (scratchkey), command, argument, argument, ..., NULL */
-static const char *termcmd[]  = { NULL, "st", NULL };
+static const char *termcmd[]  = { NULL, "kitty", NULL };
 static const char *dmenucmd[] = {
 	NULL,
 	"dmenu_run",
@@ -465,23 +465,27 @@ static const char *dmenucmd[] = {
   "-l", "7", 
 	NULL
 };
-static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", "-g", "120x34", NULL };
-static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", "-g", "120x34", NULL };
-static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-g", "144x41", "-e", "ranger", NULL };
-static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-g", "144x41", "-e", "pulsemixer", NULL };
-static const char *statusclickcmd[] = { NULL, "/home/frank/.local/bin/statusbar/statusclick.sh", NULL };
+// static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)", "-g", "120x34", NULL };
+// static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)", "-g", "120x34", NULL };
+// static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)", "-g", "144x41", "-e", "ranger", NULL };
+// static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-g", "144x41", "-e", "pulsemixer", NULL };
+static const char *spcmd_w[] = {"w", "kitty", "--name", "spterm (w)",  NULL };
+static const char *spcmd_e[] = {"e", "kitty", "--name", "spterm (e)",  NULL };
+static const char *spcmd_r[] = {"r", "kitty", "--name", "spfm (r)","-e", "ranger", NULL };
+static const char *spcmd_v[] = {"v", "kitty", "--name", "spvol (v)", "-e", "pulsemixer", NULL };
+static const char *statusclickcmd[] = { NULL, "~/.local/bin/statusbar/statusclick.sh", NULL };
 static const char *upvol[] = { NULL, "pulsemixer", "--change-volume", "+5", NULL };
 static const char *downvol[] = { NULL, "pulsemixer", "--change-volume", "-5", NULL };
 static const char *togglevol[] = { NULL, "pulsemixer", "--toggle-mute", NULL };
 static const char *playernext[] = { NULL, "playerctl", "next", NULL };
 static const char *playerprev[] = { NULL, "playerctl", "previous", NULL };
 static const char *playerplaypause[] = { NULL, "playerctl", "play-pause", NULL };
-static const char *clipboard_menu[] = {NULL, "/home/frank/.local/bin/clipboard-menu", NULL };
-static const char *power_menu[] = {NULL, "/home/frank/.local/bin/power-menu", NULL };
-static const char *favorites_menu[] = {NULL, "/home/frank/.local/bin/favorites-menu", NULL };
-static const char *favorites_menu_apps[] = {NULL, "/home/frank/.local/bin/favorites-apps-menu", NULL };
-static const char *keyboard_switcher[] = {NULL, "/home/frank/.local/bin/keyboard-swithcer-menu", NULL };
-static const char *screenshots_menu[] = {NULL, "/home/frank/.local/bin/screenshots-menu", "-m", NULL };
+static const char *clipboard_menu[] = {NULL, "~/.local/bin/clipboard-menu", NULL };
+static const char *power_menu[] = {NULL, "~/.local/bin/power-menu", NULL };
+static const char *favorites_menu[] = {NULL, "~/.local/bin/favorites-menu", NULL };
+static const char *favorites_menu_apps[] = {NULL, "~/.local/bin/favorites-apps-menu", NULL };
+static const char *keyboard_switcher[] = {NULL, "~/.local/bin/keyboard-swithcer-menu", NULL };
+static const char *screenshots_menu[] = {NULL, "~/.local/bin/screenshots-menu", "-m", NULL };
 
 
 
