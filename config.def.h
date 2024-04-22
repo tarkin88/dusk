@@ -209,8 +209,9 @@ static const Rule clientrules[] = {
 	{ .wintype = WTYPE "UTILITY", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "TOOLBAR", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "SPLASH", .flags = AlwaysOnTop|Centered|Floating },
-	{ .instance = "spterm (w)", .scratchkey = 'w', .floatpos = "50% 0%  80% 35%", .flags = Floating },
-	{ .instance = "spterm (e)", .scratchkey = 'e', .floatpos = "50% 0%  100% 45%", .flags = Floating },
+	{ .instance = "spterm (w)", .scratchkey = 'w', .floatpos = "0% 0%  50% 100%", .flags = Floating },
+	{ .instance = "spterm (e)", .scratchkey = 'e', .floatpos = "100% 0% 50% 100%", .flags = Floating },
+	{ .instance = "spterm (t)", .scratchkey = 't', .floatpos = "50% 0% 60% 40%", .flags = Floating },
 	{ .instance = "spfm (r)", .scratchkey = 'r', .floatpos = "50% 50% 40% 30%", .flags = Floating },
 	{ .instance = "spvol (v)", .scratchkey = 'v',  .floatpos = "50% 50% 30% 20%", .flags = Floating },
   { .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
@@ -287,7 +288,7 @@ static const Rule clientrules[] = {
 static const BarDef bars[] = {
 	/* monitor idx  vert   x     y      w     h     name  */
 	{  0,      0,   0,    "0%    0%     100% -1h ", "Primary top" },
-	{  0,      1,   0,    "0%    100%   100% -1h ", "Primary bottom" },
+	// {  0,      1,   0,    "0%    0%     100% -1h ", "Primary bottom" },
 	{  1,      0,   0,    "0%    0%     100% -1h ", "Secondary top" },
 	{  1,      1,   0,    "0%    100%   100% -1h ", "Secondary bottom" },
 	{  2,      0,   0,    "0%    0%     100% -1h ", "Tertiary top" },
@@ -371,11 +372,11 @@ static const WorkspaceRule wsrules[] = {
 	/*                                                                     ------------------------------- schemes ------------------------------- ------ icons ------
 	   name,  monitor,  pinned,  layout,  mfact,  nmaster,  nstack,  gaps, default,          visible,          selected,         occupied,         def,   vac,  occ,  */
 	{  "1",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "1",   "",   "[1]", },
-	{  "2",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
+	{  "2",   -1,       0,       1,       0.55,  -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
 	{  "3",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "3",   "",   "[3]", },
 	{  "4",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "[4]", },
 	{  "5",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "5",   "",   "[5]", },
-	{  "6",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "[6]", },
+	{  "6",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "[6]", },
 	{  "7",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "7",   "",   "[7]", },
 	{  "8",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "8",   "",   "[8]", },
 	{  "9",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "9",   "",   "[9]", },
@@ -391,13 +392,13 @@ static const Layout layouts[] = {
 	/* symbol     arrange function, { nmaster, nstack, layout, master axis, stack axis, secondary stack axis, symbol func }, name */
 	{ "[M]",      flextile,         { -1, -1, NO_SPLIT, MONOCLE, MONOCLE, 0, NULL }, "monocle" },
 	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
+	{ "TTT",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "bstack" },
 	{ "[T]",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TATAMI_CFACTS, 0, NULL }, "tatami mats" },
 	{ "[]=",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "tile" },
 	{ "|||",      flextile,         { -1, -1, NO_SPLIT, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "columns" },
 	{ "===",      flextile,         { -1, -1, NO_SPLIT, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "rows" },
 	{ "||=",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, 0, NULL }, "col" },
 	{ ">M>",      flextile,         { -1, -1, FLOATING_MASTER, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "floating master" },
-	{ "TTT",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "bstack" },
 	{ "===",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, 0, NULL }, "bstackhoriz" },
 	{ "==#",      flextile,         { -1, -1, SPLIT_HORIZONTAL, TOP_TO_BOTTOM, GAPPLESSGRID_CFACTS, 0, NULL }, "bstackgrid" },
 	{ "|M|",      flextile,         { -1, -1, SPLIT_CENTERED_VERTICAL, LEFT_TO_RIGHT, TOP_TO_BOTTOM, TOP_TO_BOTTOM, NULL }, "centeredmaster" },
@@ -457,7 +458,7 @@ static const StackerIcon stackericons[] = {
 #define CMD(...)   { .v = (const char*[]){ NULL, __VA_ARGS__, NULL } }
 
 /* Scratch/Spawn commands:        NULL (scratchkey), command, argument, argument, ..., NULL */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char *dmenucmd[] = {
 	"dmenu_run",
   "-c",
@@ -467,6 +468,7 @@ static const char *dmenucmd[] = {
 
 static const char *spcmd_w[] = {"w", "kitty", "--name", "spterm (w)",  NULL };
 static const char *spcmd_e[] = {"e", "kitty", "--name", "spterm (e)",  NULL };
+static const char *spcmd_t[] = {"t", "kitty", "--name", "spterm (t)",  NULL };
 static const char *spcmd_r[] = {"r", "kitty", "--name", "spfm (r)","-e", "ranger", NULL };
 static const char *spcmd_v[] = {"v", "kitty", "--name", "spvol (v)", "-e", "pulsemixer", NULL };
 static const char *statusclickcmd[] = {  "~/.local/bin/statusbar/statusclick.sh", NULL };
@@ -593,6 +595,7 @@ static Key keys[] = {
 
 	SCRATCHKEYS(MODKEY,                         XK_w,            spcmd_w)
 	SCRATCHKEYS(MODKEY,                         XK_e,            spcmd_e)
+	SCRATCHKEYS(MODKEY,                         XK_t,            spcmd_t)
 	SCRATCHKEYS(MODKEY,                         XK_r,            spcmd_r)
 	SCRATCHKEYS(MODKEY,                         XK_v,            spcmd_v)
 
