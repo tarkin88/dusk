@@ -1,4 +1,5 @@
 /* Utilities */
+#include "defaults.h"
 #include "lookup.c"
 
 /* Bar functionality */
@@ -65,6 +66,7 @@
 #include "rotatestack.c"
 #include "savefloats.c"
 #include "setborderpx.c"
+#include "settitle.c"
 #ifdef XINERAMA
 #include "sortscreens.c"
 #endif // XINERAMA

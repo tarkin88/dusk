@@ -34,7 +34,7 @@ static const uint64_t
 	NoBorders = 0x800, // as per the noborder patch, show no border when only one client in tiled mode
 	Warp = 0x1000, // warp patch
 	FocusedOnTop = 0x2000,
-	DecorationHints = 0x4000, // used by setfullscreen, prevents state change
+	DecorationHints = 0x4000,
 	FocusOnNetActive = 0x8000,
 	AllowNoModifierButtons = 0x10000,
 	CenterSizeHintsClients = 0x20000, // center tiled clients subject to size hints within their tiled area
@@ -65,7 +65,7 @@ static const uint64_t
 	FocusFollowMouse = 0x40000000000, // window that rests under the mouse cursor will get focus when changing workspace or killing clients
 	BanishMouseCursorToCorner = 0x80000000000, // makes BanishMouseCursor also move the cursor to top right corner of the screen
 	StackerIcons = 0x100000000000, // adds a stacker icon hints in window titles
-	FuncPlaceholder35184372088832 = 0x200000000000,
+	AltWindowTitles = 0x200000000000, // show alternate window titles, if present
 	FuncPlaceholder70368744177664 = 0x400000000000,
 	FuncPlaceholder140737488355328 = 0x800000000000,
 	FuncPlaceholder281474976710656 = 0x1000000000000,

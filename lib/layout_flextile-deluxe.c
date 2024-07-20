@@ -523,7 +523,8 @@ arrange_monocle(Workspace *ws, int x, int y, int h, int w, int ih, int iv, int n
 		c->area = grp;
 		c->arr = arr;
 		if (c == f) {
-			XMoveWindow(dpy, c->win, x, y);
+			if (!ISLOCKED(c))
+				XMoveWindow(dpy, c->win, x, y);
 			resize(c, x, y, w - (2 * c->bw), h - (2 * c->bw), 0);
 		} else {
 			hide(c);
@@ -1181,6 +1182,7 @@ flextile(Workspace *ws)
 		setflexsymbols(ws, n);
 	else if (ws->layout->preset.symbolfunc != NULL)
 		ws->layout->preset.symbolfunc(ws, n);
+
 	if (n == 0) {
 		setwindowborders(ws, ws->sel);
 		return;
@@ -1254,7 +1256,7 @@ void
 decksymbols(Workspace *ws, unsigned int n)
 {
 	if (n > ws->nmaster)
-		snprintf(ws->ltsymbol, sizeof ws->ltsymbol, "[]%d", n);
+		snprintf(ws->ltsymbol, sizeof ws->ltsymbol, "[]%d", n - ws->nmaster);
 	else
 		snprintf(ws->ltsymbol, sizeof ws->ltsymbol, "[D]");
 }
@@ -1302,5 +1304,4 @@ rotatelayoutaxis(const Arg *arg)
 			ws->ltaxis[axis] = AXIS_LAST - 1;
 	}
 	arrange(ws);
-	setflexsymbols(ws, 0);
 }
