@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx       = 2;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 9;   /* horiz inner gap between windows */
-static const unsigned int gappiv         = 9;   /* vert inner gap between windows */
-static const unsigned int gappoh         = 9;   /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 9;   /* vert outer gap between windows and screen edge */
+static const unsigned int gappih         = 12;   /* horiz inner gap between windows */
+static const unsigned int gappiv         = 12;   /* vert inner gap between windows */
+static const unsigned int gappoh         = 16;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 16;   /* vert outer gap between windows and screen edge */
 static const unsigned int gappfl         = 9;   /* gap between floating windows (when relevant) */
 static const unsigned int smartgaps_fact = 0;   /* smartgaps factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 
@@ -79,17 +79,17 @@ static uint64_t functionality = 0
 //	|SmartGapsMonocle // enforces no gaps in monocle layout
 	|Systray // enables a systray in the bar
 //	|SystrayNoAlpha // disables the use of transparency for the systray, enable if you do not use a compositor
-	|Swallow // allows X applications started from the command line to swallow the terminal
-	|SwallowFloating // allow floating windows to swallow the terminal by default
+	/*|Swallow // allows X applications started from the command line to swallow the terminal*/
+	/*|SwallowFloating // allow floating windows to swallow the terminal by default*/
 	|CenteredWindowName // center the window titles on the bar
-  |BarActiveGroupBorderColor // use border color of active group for the bar, otherwise normal scheme is used
+  /*|BarActiveGroupBorderColor // use border color of active group for the bar, otherwise normal scheme is used*/
 //	|BarMasterGroupBorderColor // use border color of master group for the bar, otherwise normal scheme is used
 //	|FlexWinBorders // use the SchemeFlex* color schemes, falls back to SchemeTitle* if disabled
-	|SpawnCwd // spawn applications in the currently selected client's working directory
+	/*|SpawnCwd // spawn applications in the currently selected client's working directory*/
 	// |ColorEmoji // enables color emoji support (removes Xft workaround)
 //	|Status2DNoAlpha // option to not use alpha when drawing status2d status
 	// |BarBorder // draw a border around the bar
-	|BarPadding // add vertical and side padding as per vertpad and sidepad variables above
+	/*|BarPadding // add vertical and side padding as per vertpad and sidepad variables above*/
 //	|NoBorders // as per the noborder patch, show no border when only one client in tiled mode
 //	|Warp // warp cursor to currently focused window
 //	|DecorationHints // omit drawing the window border if the applications asks not to
@@ -98,7 +98,7 @@ static uint64_t functionality = 0
 	|FocusFollowMouse // allow window under the mouse cursor to get focus when changing views or killing clients
 //	|FocusOnClick // only allow focus change when the user clicks on windows (disables sloppy focus)
 	|FocusOnNetActive // allow windows demanding attention to receive focus automatically
-	|AllowNoModifierButtons // allow some window operations, like move and resize, to work without having to hold down a modifier key
+	/*|AllowNoModifierButtons // allow some window operations, like move and resize, to work without having to hold down a modifier key*/
 	|CenterSizeHintsClients // center tiled clients subject to size hints within their tiled area
 //	|ResizeHints // respect size hints also when windows are tiled
 	|SnapToWindows // snap to windows when moving floating clients
@@ -106,13 +106,13 @@ static uint64_t functionality = 0
 //	|ViewOnWs // follow a window to the workspace it is being moved to
 	|Xresources // add support for changing colours via Xresources
 //	|Debug // enables additional debug output
-	|AltWindowTitles // show alternate window titles, if present
+	/*|AltWindowTitles // show alternate window titles, if present*/
 //	|AltWorkspaceIcons // show the workspace name instead of the icons
 //	|GreedyMonitor // disables swap of workspaces between monitors
 	|SmartLayoutConvertion // automatically adjust layout based on monitor orientation when moving a workspace from one monitor to another
 //	|AutoHideScratchpads // automatically hide open scratchpads when moving to another workspace
 //	|RioDrawIncludeBorders // indicates whether the area drawn using slop includes the window borders
-//	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
+	|RioDrawSpawnAsync // spawn the application alongside rather than after drawing area using slop
 //	|RestrictFocusstackToMonitor // restrict focusstack to only operate within the monitor, otherwise focus can drift between monitors
 //	|WinTitleIcons // adds application icons to window titles in the bar
 //  |StackerIcons // adds a stacker icon hints in window titles
@@ -210,11 +210,11 @@ static const Rule clientrules[] = {
 	{ .wintype = WTYPE "UTILITY", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "TOOLBAR", .flags = AlwaysOnTop|Centered|Floating },
 	{ .wintype = WTYPE "SPLASH", .flags = AlwaysOnTop|Centered|Floating },
-	{ .instance = "spterm (w)", .scratchkey = 'w', .floatpos = "0% 0%  50% 100%", .flags = Floating },
-	{ .instance = "spterm (e)", .scratchkey = 'e', .floatpos = "100% 0% 50% 100%", .flags = Floating },
-	{ .instance = "spterm (t)", .scratchkey = 't', .floatpos = "50% 0% 60% 40%", .flags = Floating },
+	{ .instance = "spterm (w)", .scratchkey = 'w', .floatpos = "50% 0%  85% 50%", .flags = Floating },
+	{ .instance = "spterm (e)", .scratchkey = 'e', .floatpos = "50% 0% 70% 40%", .flags = Floating },
+	{ .instance = "spblue (t)", .scratchkey = 't', .floatpos = "50% 0% 40% 60%", .flags = Floating },
 	{ .instance = "spfm (r)", .scratchkey = 'r', .floatpos = "50% 50% 40% 30%", .flags = Floating },
-	{ .instance = "spvol (v)", .scratchkey = 'v',  .floatpos = "50% 50% 30% 20%", .flags = Floating },
+	{ .instance = "spvol (v)", .scratchkey = 'v',  .floatpos = "50% 50% 40% 25%", .flags = Floating },
   { .class = "Slack", .workspace = "4", .flags = SwitchWorkspace },
 	{ .class = "Spotify", .workspace = "6", .flags = SwitchWorkspace },
 	{ .class = "Code", .workspace = "2", .flags = SwitchWorkspace },
@@ -223,11 +223,10 @@ static const Rule clientrules[] = {
   { .class = "Arandr", .flags = Floating},
 	{ .class = "Lxappearance", .flags = Floating},
 	{ .class = "Galculator", .flags = Floating, .floatpos = "50% 50%" },
-	{ .class = "firefox", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
-	{ .class = "Google-chrome", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
+	{ .class = "floorp", .workspace = "1", .flags = AttachMaster|SwitchWorkspace },
+	{ .class = "floorp", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
 	{ .class = "Steam", .flags = Floating|Centered },
 	{ .class = "steam_app_", .flags = SteamGame|Floating|Centered },
-	{ .class = "Google-chrome", .role = "GtkFileChooserDialog", .floatpos = "50% 50%", .flags = AlwaysOnTop|Floating },
 	{ .role = "pop-up", .flags = AlwaysOnTop|Floating|Centered },
 	{ .role = "browser", .flags = AttachBelow|OnlyModButtons|SwitchWorkspace },
 	{ .class = "Gnome-terminal", .role = "gnome-terminal-preferences", .flags = Centered },
@@ -289,7 +288,7 @@ static const Rule clientrules[] = {
 static const BarDef bars[] = {
 	/* monitor idx  vert   x     y      w     h     name  */
 	{  0,      0,   0,    "0%    0%     100% -1h ", "Primary top" },
-	// {  0,      1,   0,    "0%    0%     100% -1h ", "Primary bottom" },
+  {  0,      1,   0,    "0%    0%     100% -1h ", "Primary bottom" },
 	{  1,      0,   0,    "0%    0%     100% -1h ", "Secondary top" },
 	{  1,      1,   0,    "0%    100%   100% -1h ", "Secondary bottom" },
 	{  2,      0,   0,    "0%    0%     100% -1h ", "Tertiary top" },
@@ -316,8 +315,6 @@ static const BarDef bars[] = {
 static const BarRule barrules[] = {
 	/* monitor  bar    scheme   lpad rpad value  alignment               sizefunc                  drawfunc                 clickfunc                 hoverfunc                 name */
 	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
-	{  0,       0,     0,       5,   5,   7,     BAR_ALIGN_LEFT,         size_status,              draw_status,             click_status,             NULL,                     "status7" },
-	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_workspaces,          draw_workspaces,         click_workspaces,         hover_workspaces,         "workspaces" },
 	{ -1,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_LEFT,         size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{ -1,       0,     5,       0,   0,   0,     BAR_ALIGN_LEFT,         size_ltsymbol,            draw_ltsymbol,           click_ltsymbol,           NULL,                     "layout" },
@@ -335,6 +332,8 @@ static const BarRule barrules[] = {
 	{  0,       0,     0,       5,   5,   5,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status5" },
 	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{  0,       0,     0,       5,   5,   6,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status6" },
+	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
+	{  0,       0,     0,       5,   5,   7,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status7" },
 	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
 	{  0,       0,     0,       5,   5,   8,     BAR_ALIGN_RIGHT,        size_status,              draw_status,             click_status,             NULL,                     "status8" },
 	{  0,       0,     0,       0,   0,   PWRL,  BAR_ALIGN_RIGHT,        size_powerline,           draw_powerline,          NULL,                     NULL,                     "powerline join" },
@@ -372,12 +371,12 @@ static const BarRule barrules[] = {
 static const WorkspaceRule wsrules[] = {
 	/*                                                                     ------------------------------- schemes ------------------------------- ------ icons ------
 	   name,  monitor,  pinned,  layout,  mfact,  nmaster,  nstack,  gaps, default,          visible,          selected,         occupied,         def,   vac,  occ,  */
-	{  "1",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "1",   "",   "[1]", },
-	{  "2",   -1,       0,       1,       0.55,  -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
+	{  "1",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "1",   "",   "[1]", },
+	{  "2",   -1,       0,       0,       0.55,  -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "2",   "",   "[2]", },
 	{  "3",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "3",   "",   "[3]", },
-	{  "4",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "[4]", },
+	{  "4",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "4",   "",   "[4]", },
 	{  "5",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "5",   "",   "[5]", },
-	{  "6",   -1,       0,       1,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "[6]", },
+	{  "6",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "6",   "",   "[6]", },
 	{  "7",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "7",   "",   "[7]", },
 	{  "8",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "8",   "",   "[8]", },
 	{  "9",   -1,       0,       0,       -1,    -1,       -1,      -1,    SchemeWsNorm,     SchemeWsVisible,  SchemeWsSel,      SchemeWsOcc,      "9",   "",   "[9]", },
@@ -391,8 +390,8 @@ static const int enablegaps  = 1;    /* whether gaps are enabled by default or n
 /* layout(s) */
 static const Layout layouts[] = {
 	/* symbol     arrange function, { nmaster, nstack, layout, master axis, stack axis, secondary stack axis, symbol func }, name */
-	{ "[M]",      flextile,         { -1, -1, NO_SPLIT, MONOCLE, MONOCLE, 0, NULL }, "monocle" },
 	{ "[D]",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, MONOCLE, 0, NULL }, "deck" },
+	{ "[M]",      flextile,         { -1, -1, NO_SPLIT, MONOCLE, MONOCLE, 0, NULL }, "monocle" },
 	{ "TTT",      flextile,         { -1, -1, SPLIT_HORIZONTAL, LEFT_TO_RIGHT, LEFT_TO_RIGHT, 0, NULL }, "bstack" },
 	{ "[T]",      flextile,         { -1, -1, SPLIT_VERTICAL, LEFT_TO_RIGHT, TATAMI_CFACTS, 0, NULL }, "tatami mats" },
 	{ "[]=",      flextile,         { -1, -1, SPLIT_VERTICAL, TOP_TO_BOTTOM, TOP_TO_BOTTOM, 0, NULL }, "tile" },
@@ -459,7 +458,7 @@ static const StackerIcon stackericons[] = {
 #define CMD(...)   { .v = (const char*[]){ NULL, __VA_ARGS__, NULL } }
 
 /* Scratch/Spawn commands:        NULL (scratchkey), command, argument, argument, ..., NULL */
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *dmenucmd[] = {
 	"dmenu_run",
   "-c",
@@ -467,11 +466,11 @@ static const char *dmenucmd[] = {
 	NULL
 };
 
-static const char *spcmd_w[] = {"w", "kitty", "--name", "spterm (w)",  NULL };
-static const char *spcmd_e[] = {"e", "kitty", "--name", "spterm (e)",  NULL };
-static const char *spcmd_t[] = {"t", "kitty", "--name", "spterm (t)",  NULL };
-static const char *spcmd_r[] = {"r", "kitty", "--name", "spfm (r)","-e", "ranger", NULL };
-static const char *spcmd_v[] = {"v", "kitty", "--name", "spvol (v)", "-e", "pulsemixer", NULL };
+static const char *spcmd_w[] = {"w", "st", "-n", "spterm (w)",  NULL };
+static const char *spcmd_e[] = {"e", "st", "-n", "spterm (e)",  NULL };
+static const char *spcmd_t[] = {"t", "st", "-n", "spblue (t)", "-e", "bluetui",  NULL };
+static const char *spcmd_r[] = {"r", "st", "-n", "spfm (r)","-e", "ranger", NULL };
+static const char *spcmd_v[] = {"v", "st", "-n", "spvol (v)", "-e", "pulsemixer", NULL };
 static const char *statusclickcmd[] = {  "~/.local/bin/statusbar/statusclick.sh", NULL };
 static const char *upvol[] = {  "pulsemixer", "--change-volume", "+5", NULL };
 static const char *downvol[] = {  "pulsemixer", "--change-volume", "-5", NULL };
